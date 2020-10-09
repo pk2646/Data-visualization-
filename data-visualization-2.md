@@ -78,3 +78,101 @@ weather_df
     ##  9 CentralPark_NY USW00094728 2017-01-09     0  -4.9  -9.9
     ## 10 CentralPark_NY USW00094728 2017-01-10     0   7.8  -6  
     ## # … with 1,085 more rows
+
+Previous plots
+
+``` r
+weather_df %>% 
+  ggplot(aes(x = tmin, y = tmax, color = name)) +
+  geom_point(alpha = 0.5)
+```
+
+    ## Warning: Removed 15 rows containing missing values (geom_point).
+
+![](data-visualization-2_files/figure-gfm/unnamed-chunk-2-1.png)<!-- -->
+
+## Labels
+
+``` r
+weather_df %>% 
+  ggplot(aes(x = tmin, y = tmax, color = name)) +
+  geom_point(alpha = 0.5) +
+  labs(
+    title = "Temperature plot",
+    x = "Minimum daily temperature (c)", 
+    y = "Maximum daily temperature (c)",
+    caption = "Data from rnoaa package; temperatures in 2017"
+  )
+```
+
+    ## Warning: Removed 15 rows containing missing values (geom_point).
+
+![](data-visualization-2_files/figure-gfm/unnamed-chunk-3-1.png)<!-- -->
+
+## Scales
+
+Start with the same plot; x and y scales
+
+``` r
+weather_df %>% 
+  ggplot(aes(x = tmin, y = tmax, color = name)) +
+  geom_point(alpha = 0.5) +
+  labs(
+    title = "Temperature plot",
+    x = "Minimum daily temperature (c)", 
+    y = "Maximum daily temperature (c)",
+    caption = "Data from rnoaa package; temperatures in 2017"
+  ) +
+  scale_x_continuous(
+    breaks = c(-15, 0, 15),
+    labels = c("-15 C", "0 C", "15 C")
+  ) +
+  scale_y_continuous(
+    position = "right"
+  )
+```
+
+    ## Warning: Removed 15 rows containing missing values (geom_point).
+
+![](data-visualization-2_files/figure-gfm/unnamed-chunk-4-1.png)<!-- -->
+
+Look at colour scale
+
+``` r
+weather_df %>% 
+  ggplot(aes(x = tmin, y = tmax, color = name)) +
+  geom_point(alpha = 0.5) +
+  labs(
+    title = "Temperature plot",
+    x = "Minimum daily temperature (c)", 
+    y = "Maximum daily temperature (c)",
+    caption = "Data from rnoaa package; temperatures in 2017"
+  ) +
+  scale_color_hue(
+    name = "Location",
+    h = c(100, 300))
+```
+
+    ## Warning: Removed 15 rows containing missing values (geom_point).
+
+![](data-visualization-2_files/figure-gfm/unnamed-chunk-5-1.png)<!-- -->
+
+``` r
+weather_df %>% 
+  ggplot(aes(x = tmin, y = tmax, color = name)) +
+  geom_point(alpha = 0.5) +
+  labs(
+    title = "Temperature plot",
+    x = "Minimum daily temperature (c)", 
+    y = "Maximum daily temperature (c)",
+    caption = "Data from rnoaa package; temperatures in 2017"
+  ) +
+  viridis::scale_color_viridis(
+    name = "location",
+    discrete = TRUE
+    )
+```
+
+    ## Warning: Removed 15 rows containing missing values (geom_point).
+
+![](data-visualization-2_files/figure-gfm/unnamed-chunk-6-1.png)<!-- -->
